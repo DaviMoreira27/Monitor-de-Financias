@@ -1,0 +1,29 @@
+header{
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #667ad1;
+}
+
+header h1{
+    color: #00ff33;
+}
+
+header nav{
+    display: flex;
+    gap: 2rem;
+    margin-right: 5rem;
+}
+
+header nav li a{
+    display: block;
+    padding: .5rem;
+    color: #FFFF;
+}
+
+header nav li a:hover {
+    color: #00ff33;
+    transition: ease .4s;
+}
