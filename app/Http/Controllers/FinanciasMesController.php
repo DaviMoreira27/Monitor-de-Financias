@@ -27,6 +27,43 @@ class FinanciasMesController extends Controller
         return view('get-faturamento')->with('financias', $financias)->with('gastos', $gastos)->with('tipoGasto', $tipoGasto);
     }
 
+    public function redirectUpdate($id){
+        $financias = FinanciasMes::all()->where('idFinancias', $id)->take(1)->all();
+        return view('atualizar-faturamento')->with('financias', $financias);
+    }
+
+    public function update(Request $request, $id){
+        $financiaObj = (new FinanciasMes())->all()->where('idFinancias', $id);
+        $gastoObj = new GastosMesController();
+
+        $collections = json_decode($request->input('collectionGastos'), true);
+
+        //0 => Mês, 1 => Ano
+        $monthYear = $this->retrieveMonthYear($request->input('month-year'));
+        if(!empty($request->input('FaturaD')) && !empty($request->input('FaturaD'))){
+            $cardValue = $this->calcCard([$request->input('FaturaD'), $request->input('FaturaC')]);
+        }else{
+            $cardValue = $request->input('oldFatura');
+        }
+
+        if(!empty($collections)){
+            for ($i = 0; $i < count($collections); $i++) {
+                $gastoObj->store($collections[$i], $id);
+            }
+        }
+
+        $newGasto = number_format($gastoObj->refactorFaturamento($id), 0, '.', '.');
+        foreach ($financiaObj as $financia) {
+            $financia->month = $monthYear[0];
+            $financia->year = $monthYear[1];
+            $financia->gastosMes = $newGasto;
+            $financia->faturamentoMes = $cardValue;
+            $financia->bFinal = $cardValue - $newGasto;
+            $financia->update();
+        }
+
+        return redirect('/');
+    }
 
     public function delete($id){
         $deleteAll = (new GastosMesController)->deleteAll($id);
@@ -43,7 +80,6 @@ class FinanciasMesController extends Controller
 
     public function store(Request $request){
         $financia = new FinanciasMes();
-
 
         $validation = $request->validate([
             'month-year' => ['required', 'date_format:Y-m'],
@@ -112,7 +148,7 @@ class FinanciasMesController extends Controller
     }
 
     private function retrieveMonthYear($requestValue){
-        $getYear = strstr($requestValue, '-', true);
+        $getYear = str_replace('', '',strstr($requestValue, '-', true));
         $getMonth = str_replace('-', '', strstr($requestValue, '-'));
 
         return [$getMonth, $getYear];

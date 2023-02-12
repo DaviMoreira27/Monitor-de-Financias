@@ -31,3 +31,7 @@ Route::post('post/faturamento', [FinanciasMesController::class, 'store']);
 Route::get('/deletar-faturamento/{id}', [FinanciasMesController::class, 'delete']);
 Route::get('/deletar-gastoMes/{idGasto}/{idFinancias}', [GastosMesController::class, 'delete']);
 
+
+//Update(PATCH)
+Route::get('/atualizar-faturamento/{id}', [FinanciasMesController::class, 'redirectUpdate']);
+Route::get('/update/faturamento/{id}', [FinanciasMesController::class, 'update']);

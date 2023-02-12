@@ -16,7 +16,7 @@
                             <a id="delete-btn" href="/deletar-faturamento/{{$get->idFinancias}}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
-                            <a id="update-btn">
+                            <a id="update-btn" href="/atualizar-faturamento/{{$get->idFinancias}}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </div>
@@ -48,7 +48,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        aaa
                         <a id="delete-btn" href="/deletar-gastoMes/{{$gasto->idGasto}}/{{$gasto->idFinancias}}">
                             <i class="fa-solid fa-trash"></i>
                         </a>

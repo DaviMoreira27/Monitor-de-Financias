@@ -40,10 +40,10 @@ class GastosMesController extends Controller
             number_format($this->refactorFaturamento($idFinancias), 0, '.', '.');
             $financia->update();
         }
-        return redirect('/');
+        return redirect()->back();
     }
 
-    private function refactorFaturamento($idFinancias){
+    public function refactorFaturamento($idFinancias){
         $gastos = GastosMes::all()->where('idFinancias', $idFinancias);
         $valorDespesa = [];
         foreach($gastos as $gasto){
