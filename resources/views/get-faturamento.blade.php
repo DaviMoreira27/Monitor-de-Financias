@@ -48,7 +48,9 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="delete-btn"><i class="fa-solid fa-trash"></i></button>
+                        <a id="delete-btn" href="/deletar-gastoMes/{{$gasto->idGasto}}/{{$gasto->idFinancias}}">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
                     </div>
                     @endforeach
                 </article>

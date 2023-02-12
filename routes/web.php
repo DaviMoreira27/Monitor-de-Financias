@@ -29,4 +29,5 @@ Route::post('post/faturamento', [FinanciasMesController::class, 'store']);
 
 //Delete
 Route::get('/deletar-faturamento/{id}', [FinanciasMesController::class, 'delete']);
+Route::get('/deletar-gastoMes/{idGasto}/{idFinancias}', [GastosMesController::class, 'delete']);
 

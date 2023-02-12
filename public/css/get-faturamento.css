@@ -41,7 +41,7 @@
     padding: 1rem;
 }
 
-.box-gastos button{
+.box-gastos #delete-btn{
     padding: 1rem;
     border: transparent;
     color: #FFF;

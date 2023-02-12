@@ -27,9 +27,11 @@ class FinanciasMesController extends Controller
         return view('get-faturamento')->with('financias', $financias)->with('gastos', $gastos)->with('tipoGasto', $tipoGasto);
     }
 
+
     public function delete($id){
-        $gastos = GastosMes::all()->where('idFinancias', $id)->get($id)->delete();
-        
+        $deleteAll = (new GastosMesController)->deleteAll($id);
+        $gastos = FinanciasMes::where('idFinancias', $id)->delete();
+        return redirect('/');
     }
 
     public function paginate($items, $perPage = 5, $page = null, $options = [])
