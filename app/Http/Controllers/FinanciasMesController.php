@@ -52,7 +52,7 @@ class FinanciasMesController extends Controller
             }
         }
 
-        $newGasto = number_format($gastoObj->refactorFaturamento($id), 0, '.', '.');
+        $newGasto = number_format($gastoObj->refactorFaturamento($id), 2, '.', '');
         foreach ($financiaObj as $financia) {
             $financia->month = $monthYear[0];
             $financia->year = $monthYear[1];
@@ -119,7 +119,7 @@ class FinanciasMesController extends Controller
         $money = $requestValue[0];
         $creditCard = $requestValue[1];                 
 
-        return number_format($money + $creditCard, 0, '.', '.');
+        return number_format($money + $creditCard, 2, '.', '');
     }
 
     private function finalBalance($requestValue, $cardValue){
@@ -130,7 +130,7 @@ class FinanciasMesController extends Controller
             array_push($arrayGastos, $json['valorGasto']);
         }
 
-        $expensesValue = (float) number_format(array_sum($arrayGastos), 0, '.', '.');
+        $expensesValue = number_format(array_sum($arrayGastos), 2, '.', '');
         return $cardValue - $expensesValue;
     }
 
@@ -143,7 +143,7 @@ class FinanciasMesController extends Controller
             array_push($arrayGastos, $json['valorGasto']);
         }
 
-        $expensesValue = (float) number_format(array_sum($arrayGastos), 0, '.', '.');
+        $expensesValue = number_format(array_sum($arrayGastos), 2, '.', '');
         return $expensesValue;
     }
 

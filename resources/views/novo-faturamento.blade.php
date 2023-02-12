@@ -2,7 +2,6 @@
 @section('title', 'Novo Faturamento')
 @section('css', 'faturamento')
 @section('js', 'faturamento')
-    
 
 @section('content')
     <main class="container-center">
@@ -44,7 +43,7 @@
                 </label>
 
                 <label for="input-valorGasto">Valor do Gasto
-                    <input type="number" id="input-valorGasto" placeholder="Valor do Gasto">
+                    <input type="text" data-js="money" id="input-valorGasto" placeholder="Valor do Gasto">
                 </label>
             </div>
             <div class="rowObj-gastos rows" id="rowObj-gastos"></div>
@@ -52,14 +51,15 @@
             <button type="button" id="add-gasto">Adicionar Gasto</button>
 
             <label for="input-faturamentoD">Faturamento Dinheiro
-                <input type="text" id="input-faturamentoD" name="FaturaD" placeholder="Faturamento em Dinheiro">
+                <input type="text" data-js="money" id="input-faturamentoD" name="FaturaD" placeholder="Faturamento em Dinheiro">
             </label>
 
             <label for="input-faturamentoC">Faturamento Cartão
-                <input type="text" id="input-faturamentoC" name="FaturaC" placeholder="Faturamento Cartão">
+                <input type="text" data-js="money" id="input-faturamentoC" name="FaturaC" placeholder="Faturamento Cartão">
             </label>
 
             <button type="submit" id="final-gasto">Adicionar Gasto</button>
         </form>
     </main>
+    <script src="/js/regex.js"></script>
 @endsection

@@ -35,9 +35,9 @@ class GastosMesController extends Controller
         $gastos = GastosMes::where('idGasto', $idGastos)->delete();
         $faturamentoMes = FinanciasMes::all()->where('idFinancias', $idFinancias);
         foreach($faturamentoMes as $financia){
-            $financia->gastosMes = number_format($this->refactorFaturamento($idFinancias), 0, '.', '.');
+            $financia->gastosMes = number_format($this->refactorFaturamento($idFinancias), 2, '.', '');
             $financia->bFinal = $financia->faturamentoMes -
-            number_format($this->refactorFaturamento($idFinancias), 0, '.', '.');
+            number_format($this->refactorFaturamento($idFinancias), 2, '.', '');
             $financia->update();
         }
         return redirect()->back();

@@ -48,7 +48,7 @@
                 </label>
 
                 <label for="input-valorGasto">Valor do Gasto
-                    <input type="number" id="input-valorGasto" placeholder="Valor do Gasto">
+                    <input type="number" data-js="money" id="input-valorGasto" placeholder="Valor do Gasto">
                 </label>
             </div>
             <div class="rowObj-gastos rows" id="rowObj-gastos"></div>
@@ -57,19 +57,21 @@
 
 
                 <label for="faturaTotal">Faturamento Total
-                    <input type="text" value="{{$financia->faturamentoMes}}" name="oldFatura" id="faturaTotal" placeholder="Faturamento Total">
+                    <input type="text" readonly="readonly" value="{{$financia->faturamentoMes}}" name="oldFatura" id="faturaTotal" 
+                    placeholder="Faturamento Total">
                 </label>
 
                 <label for="input-faturamentoD">Faturamento Dinheiro
-                    <input type="text" id="input-faturamentoD" name="FaturaD" placeholder="Faturamento em Dinheiro">
+                    <input type="text" data-js="money" id="input-faturamentoD" name="FaturaD" placeholder="Faturamento em Dinheiro">
                 </label>
 
                 <label for="input-faturamentoC">Faturamento Cartão
-                    <input type="text" id="input-faturamentoC" name="FaturaC" placeholder="Faturamento Cartão">
+                    <input type="text" data-js="money" id="input-faturamentoC" name="FaturaC" placeholder="Faturamento Cartão">
                 </label>
             @endforeach
 
             <button type="submit" id="final-gasto">Adicionar Gasto</button>
         </form>
     </main>
+    <script src="/js/regex.js"></script>
 @endsection
