@@ -21,7 +21,7 @@
             <div class="value-container">
                 @foreach ($datas as $data)
                     <div class="value-box">
-                        <h2>Mês {{$data->month}}</h2>
+                        <h2>Mês {{$data->month}} de {{$data->year}}</h2>
 
                         <div class="number-box">
                             <div class="fg-box" id="gastos">

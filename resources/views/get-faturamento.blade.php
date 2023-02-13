@@ -23,16 +23,24 @@
                     </section>
 
                     <span class="row-info">
-                        <p>Gasto Mês</p>
-                        <h4>{{$get->gastosMes}}</h4>
+                        <p>Gasto total do mês</p>
+                        <h4>R$ {{number_format($get->gastosMes, 2, ',', '.')}}</h4>
+                    </span>
+                    <span class="row-info">
+                        <p>Faturamento em Dinheiro</p>
+                        <h4>R$ {{number_format($get->faturaDinheiro, 2, ',', '.')}}</h4>
+                    </span>
+                    <span class="row-info">
+                        <p>Faturamento em Cartão</p>
+                        <h4>R$ {{number_format($get->faturaCartao, 2, ',', '.')}}</h4>
                     </span>
                     <span class="row-info">
                         <p>Faturamento do Mês</p>
-                        <h4>{{$get->faturamentoMes}}</h4>
+                        <h4>R$ {{number_format($get->faturamentoMes, 2, ',', '.')}}</h4>
                     </span>
                     <span class="row-info">
                         <p>Balanço Final</p>    
-                        <h4>{{$get->bFinal}}</h4>
+                        <h4>R$ {{number_format($get->bFinal, 2, ',', '.')}}</h4>
                     </span>
                     @foreach ($gastos as $gasto)  
                     <div class="box-gastos">
@@ -54,6 +62,10 @@
                     </div>
                     @endforeach
                 </article>
+                <div class="container-options">
+                    <a id="month-pdf">Gerar PDF Mensal</a>
+                    <a id="simples-doc">Gerar SIMPLES Nacional</a>
+                </div>
             </main>
     @endforeach
 @endsection

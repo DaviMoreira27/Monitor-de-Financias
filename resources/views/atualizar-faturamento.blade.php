@@ -62,11 +62,13 @@
                 </label>
 
                 <label for="input-faturamentoD">Faturamento Dinheiro
-                    <input type="text" data-js="money" id="input-faturamentoD" name="FaturaD" placeholder="Faturamento em Dinheiro">
+                    <input type="text" data-js="money" value="{{$financia->faturaDinheiro}}" id="input-faturamentoD" name="FaturaD" 
+                    placeholder="Faturamento em Dinheiro">
                 </label>
 
                 <label for="input-faturamentoC">Faturamento Cartão
-                    <input type="text" data-js="money" id="input-faturamentoC" name="FaturaC" placeholder="Faturamento Cartão">
+                    <input type="text" data-js="money" value="{{$financia->faturaCartao}}" id="input-faturamentoC" name="FaturaC" 
+                    placeholder="Faturamento Cartão">
                 </label>
             @endforeach
 

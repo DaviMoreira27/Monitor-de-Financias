@@ -11,11 +11,15 @@
     align-items: center;
 }
 
+.container-faturamento .row-buttons{
+    display: flex;
+    gap: 1rem;
+}
+
 .container-faturamento .row-buttons a{
-    padding: 1rem;
     border: transparent;
     color: #FFF;
-    margin: 1rem 0 0 1rem;
+    padding: 1rem;
 }
 
 .container-faturamento .row-buttons #delete-btn {
@@ -52,4 +56,41 @@
     display: flex;
     flex-direction: column;
     align-items: end;
+}
+
+.row-info{
+    margin-top: 1rem;
+}
+
+.container-options{
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+}
+
+.container-options a{
+    padding: 1rem;
+    cursor: pointer;
+    transition: ease .4s;
+}
+
+.container-options #month-pdf {
+    background-color: #FA5E4E;
+    border: 1px solid #FA5E4E;
+    color: #FFF;
+}
+
+.container-options #simples-doc {
+    background-color: #07b744;
+    border: 1px solid #07b744;
+    color: #FFF;
+}
+
+/* HOVER */
+
+.container-options #month-pdf:hover,  #simples-doc:hover{
+    background-color: #FFF;
+    color: #000;
+    border: 1px solid #000;
+    transition: ease .4s;
 }

@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\DB;
 class FinanciasMesController extends Controller
 {
     public function index(){
-        $financias = FinanciasMes::all()->sortBy('month')->unique($key = 'month')->values();
+        $financias = FinanciasMes::all()->sortBy([
+            ['year', 'desc'],
+            ['month', 'desc'],
+        ])->values();
+
         $datas = $financias;
         return view('index')->with('datas', $datas);
     }
@@ -56,6 +60,8 @@ class FinanciasMesController extends Controller
         foreach ($financiaObj as $financia) {
             $financia->month = $monthYear[0];
             $financia->year = $monthYear[1];
+            $financia->faturaCartao = number_format($request->input('FaturaC'), 2, '.', '');
+            $financia->faturaDinheiro = number_format($request->input('FaturaD'), 2, '.', '');
             $financia->gastosMes = $newGasto;
             $financia->faturamentoMes = $cardValue;
             $financia->bFinal = $cardValue - $newGasto;
@@ -96,6 +102,8 @@ class FinanciasMesController extends Controller
 
         $financia->month = $monthYear[0];
         $financia->year = $monthYear[1];
+        $financia->faturaCartao = number_format($request->input('FaturaC'), 2, '.', '');
+        $financia->faturaDinheiro = number_format($request->input('FaturaD'), 2, '.', '');
         $financia->gastosMes = $expenses;
         $financia->faturamentoMes = $cardValue;
         $financia->bFinal = $finalBalance;

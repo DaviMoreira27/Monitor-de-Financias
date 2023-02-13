@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('idTipoGasto');
             $table->string('nomeGasto')->charset('UTF8');
             $table->timestamp('dataGasto');
-            $table->decimal('valorGasto', 19, 3)->unsigned()->default(0.00);
+            $table->decimal('valorGasto', 10, 2)->unsigned()->default(0.00);
             $table->timestamps();
         });
     }

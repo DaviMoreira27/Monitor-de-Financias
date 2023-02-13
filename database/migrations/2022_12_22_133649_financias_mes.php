@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id('idFinancias')->autoIncrement()->from(1000);
             $table->string('month', 2);
             $table->string('year', 4);
-            $table->decimal('gastosMes', 19, 3)->unsigned()->default(0.00);
-            $table->decimal('faturamentoMes', 19, 3)->unsigned()->default(0.00);
-            $table->decimal('bFinal', 19, 3)->default(0.00);
+            $table->decimal('gastosMes', 10, 2)->unsigned()->default(0.00);
+            $table->decimal('faturaDinheiro', 10, 2)->unsigned()->default(0.00);
+            $table->decimal('faturaCartao', 10, 2)->unsigned()->default(0.00);
+            $table->decimal('faturamentoMes', 10, 2)->unsigned()->default(0.00);
+            $table->decimal('bFinal', 10, 2)->default(0.00);
             $table->timestamps($precision = 0);
         });
     }
