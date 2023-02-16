@@ -63,7 +63,7 @@
                     @endforeach
                 </article>
                 <div class="container-options">
-                    <a id="month-pdf">Gerar PDF Mensal</a>
+                    <a id="month-pdf" href="/relatorio/mes/{{$get->month}}/{{$get->year}}">Gerar PDF Mensal</a>
                     <a id="simples-doc">Gerar SIMPLES Nacional</a>
                 </div>
             </main>

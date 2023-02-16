@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\FinanciasMes;
 use App\Models\GastosMes;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class FinanciasMesController extends Controller
@@ -21,6 +24,16 @@ class FinanciasMesController extends Controller
 
         $datas = $financias;
         return view('index')->with('datas', $datas);
+    }
+
+    public function pdfGenerator($mes, $year){
+        $financias = FinanciasMes::all()->where('month', $mes)->where('year', $year)->all();
+        $pp['financias'] = reset($financias)->attributesToArray();
+        $monthPP = $pp['financias']['year'] . '-' . $pp['financias']['month']; 
+
+        Pdf::setOption('defaultFont', 'sans-serif');
+        $dom = Pdf::loadView('pdf.relatorio-mensal', $pp);
+        return $dom->stream("Relatório-Mensal - $monthPP.pdf");
     }
 
     public function get($id)
