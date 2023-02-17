@@ -1,0 +1,32 @@
+.user-container {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    margin-top: 5rem;
+}
+
+.container-logar {
+    padding: 1rem;
+}
+
+.container-logar form {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-top: 1rem;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+form input[type='submit']{
+    margin-top: 1rem;
+}
+
+form input{
+    width: 30rem;
+    padding: .5rem;
+}

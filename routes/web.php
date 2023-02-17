@@ -16,7 +16,7 @@ use App\Http\Controllers\InsertFaturamentoController;
 */
 
 //View
-Route::view('/novo-faturamento', 'novo-faturamento');
+Route::view('/novo-faturamento', 'faturamento.novo-faturamento');
 Route::view('/user', 'users.user');
 
 

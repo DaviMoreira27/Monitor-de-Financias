@@ -41,12 +41,12 @@ class FinanciasMesController extends Controller
         $financias = FinanciasMes::all()->where('idFinancias', $id)->take(1)->all();
         $gastos = GastosMes::all()->where('idFinancias', $id)->all();
         $tipoGasto = DB::table('tipo_gasto')->get();
-        return view('get-faturamento')->with('financias', $financias)->with('gastos', $gastos)->with('tipoGasto', $tipoGasto);
+        return view('faturamento.get-faturamento')->with('financias', $financias)->with('gastos', $gastos)->with('tipoGasto', $tipoGasto);
     }
 
     public function redirectUpdate($id){
         $financias = FinanciasMes::all()->where('idFinancias', $id)->take(1)->all();
-        return view('atualizar-faturamento')->with('financias', $financias);
+        return view('faturamento.atualizar-faturamento')->with('financias', $financias);
     }
 
     public function update(Request $request, $id){
