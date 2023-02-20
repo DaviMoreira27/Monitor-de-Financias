@@ -69,15 +69,15 @@
             <h1>Balança de Gastos</h1>
             <nav>
                 <li>
-                    <a href="/">Dashboard</a>
+                    <a href="{{route('home')}}">Dashboard</a>
                 </li>
 
                 <li>
-                    <a href="/user">Cadastrar ou Entrar</a>
+                    <a href="{{route('pag/register/login')}}">Cadastrar ou Entrar</a>
                 </li>
 
                 <li>
-                    <a href="/novo-faturamento">Adicionar Faturamento Mensal</a>
+                    <a href="{{route('new/pag/faturamento')}}">Adicionar Faturamento Mensal</a>
                 </li>
             </nav>
         </header>

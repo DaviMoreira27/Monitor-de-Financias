@@ -19,6 +19,9 @@
             </div>
 
             <div class="value-container">
+                @if (empty($datas->items))
+                    <h1>Nenhum dado foi encontrado!</h1>
+                @endif
                 @foreach ($datas as $data)
                     <div class="value-box">
                         <h2>Mês {{$data->month}} de {{$data->year}}</h2>

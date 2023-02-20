@@ -5,7 +5,7 @@
 
 @section('content')
     <main class="container-center">
-        <form action="post/faturamento" method="POST">
+        <form action="{{route('new/faturamento')}}" method="POST">
             <h1>Balanço Mensal</h1>
 
             @if ($errors->all())

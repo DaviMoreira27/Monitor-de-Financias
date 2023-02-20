@@ -6,16 +6,23 @@
 @section('content')
     <main class="content-center">
         <section class="user-container">
+            @if ($errors->all())
+                <div class="errors-container">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
             <article class="container-login container-logar">
                 <h1>Logar</h1>
-                <form action="#" method="POST">
+                <form action="/login" method="POST">
                     @csrf('POST')
 
                     <label for="input-cnpj">CNPJ
                         <input type="text" name="cnpj" id="input-cnpj">
                     </label>
                     <label for="input-cnpj">Senha
-                        <input type="password" name="senha" id="input-senha">
+                        <input type="password" name="password" id="input-senha">
                     </label>
 
                     <input type="submit" value="Entrar" id="submit-login">
@@ -25,7 +32,7 @@
 
             <article class="container-cadastro container-logar">
                 <h1>Cadastrar</h1>
-                <form action="#" method="POST">
+                <form action="{{route('register')}}" method="POST">
                     @csrf('POST')
 
                     <label for="input-cnpj">CNPJ
@@ -33,6 +40,9 @@
                     </label>
                     <label for="input-cnpj">Razão Social
                         <input type="text" name="razaoSocial" id="input-razaoSocial">
+                    </label>
+                    <label for="input-cnpj">Email
+                        <input type="email" name="email" id="input-email">
                     </label>
                     <label for="input-cnpj">Senha
                         <input type="password" name="senha" id="input-senha">

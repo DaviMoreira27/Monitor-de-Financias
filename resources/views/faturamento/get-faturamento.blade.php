@@ -13,10 +13,10 @@
                     <section class="row-faturamento">
                         <h2>Mês {{$get->month}}</h2>
                         <div class="row-buttons">
-                            <a id="delete-btn" href="/deletar-faturamento/{{$get->idFinancias}}">
+                            <a id="delete-btn" href="/deletar/faturamento/{{$get->idFinancias}}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
-                            <a id="update-btn" href="/atualizar-faturamento/{{$get->idFinancias}}">
+                            <a id="update-btn" href="/atualizar/faturamento/{{$get->idFinancias}}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </div>
@@ -56,7 +56,7 @@
                                 @endif
                             @endforeach
                         </div>
-                        <a id="delete-btn" href="/deletar-gastoMes/{{$gasto->idGasto}}/{{$gasto->idFinancias}}">
+                        <a id="delete-btn" href="/deletar/gastoMes/{{$gasto->idGasto}}/{{$gasto->idFinancias}}">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                     </div>
