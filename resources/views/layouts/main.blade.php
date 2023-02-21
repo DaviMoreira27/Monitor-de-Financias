@@ -62,6 +62,7 @@
         }
     </style>
 </head>
+
 <body>
 
     @if (!Request::is('relatorio/*'))
@@ -69,15 +70,19 @@
             <h1>Balança de Gastos</h1>
             <nav>
                 <li>
-                    <a href="{{route('home')}}">Dashboard</a>
+                    <a href="{{ route('home') }}">Dashboard</a>
                 </li>
-
+                @if (session()->get('user'))
+                    <li>
+                        <a href="{{ route('logout') }}">Logout</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('pag/register/login') }}">Cadastrar ou Entrar</a>
+                    </li>
+                @endif
                 <li>
-                    <a href="{{route('pag/register/login')}}">Cadastrar ou Entrar</a>
-                </li>
-
-                <li>
-                    <a href="{{route('new/pag/faturamento')}}">Adicionar Faturamento Mensal</a>
+                    <a href="{{ route('new/pag/faturamento') }}">Adicionar Faturamento Mensal</a>
                 </li>
             </nav>
         </header>

@@ -30,3 +30,20 @@ form input{
     width: 30rem;
     padding: .5rem;
 }
+
+.options-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#label-remember {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    width: fit-content;
+}
+
+#label-remember input{
+    width: fit-content;
+}

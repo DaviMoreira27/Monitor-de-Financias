@@ -19,6 +19,8 @@ use App\Http\Controllers\UserController;
 //View
 Route::view('/pag/novo/faturamento', 'faturamento.novo-faturamento')->name('new/pag/faturamento');
 Route::view('/pag/register', 'users.register')->name('pag/register/login');
+Route::view('/user/forgot-password', 'users.forgot-password')
+->middleware('guest')->name('password.request');
 
 //Get
 Route::get('/', [FinanciasMesController::class, 'index'])->name('home');
@@ -42,4 +44,20 @@ Route::get('relatorio/mes/{mes}/{ano}', [FinanciasMesController::class, 'pdfGene
 
 // Login e Registro
 
-Route::post('/register', [UserController::class, 'register'])->name('register');
+Route::post('/user/register', [UserController::class, 'register'])->name('register');
+Route::post('/user/login', [UserController::class, 'login'])->name('login');
+Route::get('/user/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::post('/reset/password', [UserController::class, 'resetPass'])
+->middleware('guest')->name('reset-pass');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('users.reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', [UserController::class, 'newPassword'])->middleware('guest')->name('password.update');
+
+
+Route::get('/session/test', function(){
+    return session()->all();
+});
