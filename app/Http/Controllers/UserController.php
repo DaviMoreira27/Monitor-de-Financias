@@ -89,7 +89,7 @@ class UserController extends Controller
     public function logout(Request $request){
         Auth::logout();
         $request->session()->flush();
-        return redirect('/');
+        return redirect('/pag/register');
     }
 
     public function resetPass(Request $request){
