@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('campoGasto', 260)->charset('UTF8');
             $table->timestamps($precision = 0);
         });
+
     }
 
     /**

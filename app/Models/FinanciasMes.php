@@ -31,4 +31,8 @@ class FinanciasMes extends Model
     public function gastoMes(){
         return $this->hasMany(GastosMes::class);
     }
+
+    public function User(){
+        return $this->hasOne(User::class, 'id', 'idUser');
+    }
 }

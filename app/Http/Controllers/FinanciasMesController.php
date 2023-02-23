@@ -20,7 +20,7 @@ class FinanciasMesController extends Controller
         $financias = FinanciasMes::all()->sortBy([
             ['year', 'desc'],
             ['month', 'desc'],
-        ])->values();
+        ])->where('idUser', session()->get('user.id'));
 
         $datas = $financias;
         return view('index')->with('datas', $datas);

@@ -41,14 +41,13 @@ class UserController extends Controller
             return back()->withErrors(['register' => 'Ocorreu um erro ao criar o usuário!']);
         }
 
+        $user = User::all()->where('cnpj', $request->input('cnpj'))->toArray();
+
+
         //TODO: Pegar as informações do usuário do BD
         if (Auth::attempt($validator, $rememberMe)) {
             $request->session()->regenerate();
-            $request->session()->put('user', [
-                'cnpj' => $request->input('cnpj'),
-                'razaoSocial' => $request->input('razaoSocial'),
-                'email' => $request->input('email')
-            ]);
+            $request->session()->put('user', $user);
             return redirect()->intended('/');
         }
 
@@ -70,6 +69,8 @@ class UserController extends Controller
             return back()->withErrors(['login' => 'O usuário já está logado!']);
         }
 
+        $user = User::all()->where('cnpj', $request->input('cnpj'))->toArray();
+
         $request->merge([
             'password' => Hash::make($request->input('password'))
         ]);
@@ -77,9 +78,7 @@ class UserController extends Controller
         //TODO: Pegar as informações do usuário do BD
         if (Auth::attempt($validator, $rememberMe)) {
             $request->session()->regenerate();
-            $request->session()->put('user', [
-                'cnpj' => $request->input('cnpj'),
-            ]);
+            $request->session()->put('user', $user);
             return redirect()->intended('/');
         }
 
