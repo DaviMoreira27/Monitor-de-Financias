@@ -13,6 +13,9 @@
 
 .select-button {
     padding: 1rem;
+    border: 1px solid #000;
+    cursor: pointer;
+    background-color: #E7E7E7;
 }
 
 .value-container{

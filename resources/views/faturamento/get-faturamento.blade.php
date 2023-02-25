@@ -63,7 +63,8 @@
                     @endforeach
                 </article>
                 <div class="container-options">
-                    <a id="month-pdf" href="/relatorio/mes/{{$get->month}}/{{$get->year}}">Gerar PDF Mensal</a>
+                    <a id="month-pdf" href="{{route('pdf-generator', ['mes' => $get->month, 'ano' => $get->year])}}">Gerar PDF Mensal</a>
+                    <a id="email-send" href="{{route('email-faturamento')}}">Enviar por Email</a>
                     <a id="simples-doc">Gerar SIMPLES Nacional</a>
                 </div>
             </main>

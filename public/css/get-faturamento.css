@@ -80,6 +80,12 @@
     color: #FFF;
 }
 
+.container-options #email-send {
+    background-color: #3475e6;
+    border: 1px solid #3475e6;
+    color: #FFF;
+}
+
 .container-options #simples-doc {
     background-color: #07b744;
     border: 1px solid #07b744;
@@ -88,7 +94,7 @@
 
 /* HOVER */
 
-.container-options #month-pdf:hover,  #simples-doc:hover{
+.container-options #month-pdf:hover, #simples-doc:hover, #email-send:hover{
     background-color: #FFF;
     color: #000;
     border: 1px solid #000;

@@ -10,16 +10,20 @@
 
         <section class="economy-container">
             <div class="select-container">
-                <button class="select-button">
+                <a class="select-button" href="{{route('month-faturamento')}}">
                     Selecionar por Mês
-                </button>
-                <button class="select-button">
+                </a>
+                <a class="select-button" href="{{route('year-faturamento')}}">
                     Selecionar por Ano
-                </button>
+                </a>
+                <a class="select-button" href="{{route('home')}}">
+                    Limpar Filtros
+                </a>
             </div>
 
             <div class="value-container">
-                @if (empty($datas->items))
+
+                @if (empty($datas->toArray()))
                     <h1>Nenhum dado foi encontrado!</h1>
                 @endif
                 @foreach ($datas as $data)

@@ -16,20 +16,23 @@ use Illuminate\Support\Facades\DB;
 
 class FinanciasMesController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $financias = FinanciasMes::all()->sortBy([
             ['year', 'desc'],
             ['month', 'desc'],
-        ])->where('idUser', session()->get('user.id'));
+        ])->where('idUser', session()->get('user.0.id'));
 
         $datas = $financias;
         return view('index')->with('datas', $datas);
     }
 
-    public function pdfGenerator($mes, $year){
-        $financias = FinanciasMes::all()->where('month', $mes)->where('year', $year)->all();
+    public function pdfGenerator($mes, $year)
+    {
+        $financias = FinanciasMes::all()->where('month', $mes)->where('year', $year)
+            ->where('idUser', session()->get('user.0.id'))->all();
         $pp['financias'] = reset($financias)->attributesToArray();
-        $monthPP = $pp['financias']['year'] . '-' . $pp['financias']['month']; 
+        $monthPP = $pp['financias']['year'] . '-' . $pp['financias']['month'];
 
         Pdf::setOption('defaultFont', 'sans-serif');
         $dom = Pdf::loadView('pdf.relatorio-mensal', $pp);
@@ -44,12 +47,38 @@ class FinanciasMesController extends Controller
         return view('faturamento.get-faturamento')->with('financias', $financias)->with('gastos', $gastos)->with('tipoGasto', $tipoGasto);
     }
 
-    public function redirectUpdate($id){
+    public function getMonth()
+    {
+        $financias = FinanciasMes::all()->sortBy([
+            ['month', 'desc'],
+        ])->where('idUser', session()->get('user.0.id'));
+
+        $datas = $financias;
+        return view('index')->with('datas', $datas);
+    }
+
+    public function getYear()
+    {
+        $financias = FinanciasMes::all()->sortBy([
+            ['year', 'desc'],
+        ])->where('idUser', session()->get('user.0.id'));
+
+        $datas = $financias;
+        return view('index')->with('datas', $datas);
+    }
+
+    public function sendEmail(Request $request){
+        return $request->input('email');
+    }
+
+    public function redirectUpdate($id)
+    {
         $financias = FinanciasMes::all()->where('idFinancias', $id)->take(1)->all();
         return view('faturamento.atualizar-faturamento')->with('financias', $financias);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $financiaObj = (new FinanciasMes())->all()->where('idFinancias', $id);
         $gastoObj = new GastosMesController();
 
@@ -57,13 +86,13 @@ class FinanciasMesController extends Controller
 
         //0 => Mês, 1 => Ano
         $monthYear = $this->retrieveMonthYear($request->input('month-year'));
-        if(!empty($request->input('FaturaD')) && !empty($request->input('FaturaD'))){
+        if (!empty($request->input('FaturaD')) && !empty($request->input('FaturaD'))) {
             $cardValue = $this->calcCard([$request->input('FaturaD'), $request->input('FaturaC')]);
-        }else{
+        } else {
             $cardValue = $request->input('oldFatura');
         }
 
-        if(!empty($collections)){
+        if (!empty($collections)) {
             for ($i = 0; $i < count($collections); $i++) {
                 $gastoObj->store($collections[$i], $id);
             }
@@ -84,7 +113,8 @@ class FinanciasMesController extends Controller
         return redirect('/');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $deleteAll = (new GastosMesController)->deleteAll($id);
         $gastos = FinanciasMes::where('idFinancias', $id)->delete();
         return redirect('/');
@@ -97,7 +127,8 @@ class FinanciasMesController extends Controller
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $financia = new FinanciasMes();
 
         $validation = $request->validate([
@@ -113,6 +144,7 @@ class FinanciasMesController extends Controller
         $finalBalance = $this->finalBalance($request->input('collectionGastos'), $cardValue);
         $expenses = $this->expensesMonth($request->input('collectionGastos'));
 
+        $financia->idUser = $request->session()->get('user.0.id');
         $financia->month = $monthYear[0];
         $financia->year = $monthYear[1];
         $financia->faturaCartao = number_format($request->input('FaturaC'), 2, '.', '');
@@ -121,33 +153,35 @@ class FinanciasMesController extends Controller
         $financia->faturamentoMes = $cardValue;
         $financia->bFinal = $finalBalance;
 
-        try{
+        try {
             $financia->save();
-        }catch(ModelNotFoundException $e){
+        } catch (ModelNotFoundException $e) {
             return back()->withError($e->getMessage())->withInput();
         }
         $lastId = FinanciasMes::all()->last()->attributesToArray()['idFinancias'];
         $collections = json_decode($request->input('collectionGastos'), true);
-        
-        for($i = 0; $i < count($collections); $i++){
+
+        for ($i = 0; $i < count($collections); $i++) {
             (new GastosMesController())->store($collections[$i], $lastId);
         }
 
         return redirect('/');
     }
 
-    private function calcCard($requestValue){
+    private function calcCard($requestValue)
+    {
         $money = $requestValue[0];
-        $creditCard = $requestValue[1];                 
+        $creditCard = $requestValue[1];
 
         return number_format($money + $creditCard, 2, '.', '');
     }
 
-    private function finalBalance($requestValue, $cardValue){
+    private function finalBalance($requestValue, $cardValue)
+    {
         $jsons = json_decode($requestValue, true);
         $arrayGastos = [];
 
-        foreach($jsons as $json){
+        foreach ($jsons as $json) {
             array_push($arrayGastos, $json['valorGasto']);
         }
 
@@ -168,11 +202,11 @@ class FinanciasMesController extends Controller
         return $expensesValue;
     }
 
-    private function retrieveMonthYear($requestValue){
-        $getYear = str_replace('', '',strstr($requestValue, '-', true));
+    private function retrieveMonthYear($requestValue)
+    {
+        $getYear = str_replace('', '', strstr($requestValue, '-', true));
         $getMonth = str_replace('-', '', strstr($requestValue, '-'));
 
         return [$getMonth, $getYear];
     }
-
 }
