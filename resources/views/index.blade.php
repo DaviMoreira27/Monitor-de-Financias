@@ -8,6 +8,14 @@
     <main class="container-center">
         <h1>Dashboard</h1>
 
+        @if ($errors->all())
+            <div class="errors-container">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
         <section class="economy-container">
             <div class="select-container">
                 <a class="select-button" href="{{route('month-faturamento')}}">

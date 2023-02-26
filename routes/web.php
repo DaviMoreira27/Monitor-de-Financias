@@ -47,7 +47,6 @@ Route::middleware(acessController::class)->group(function () {
 
     //View
     Route::view('/pag/novo/faturamento', 'faturamento.novo-faturamento')->name('new/pag/faturamento');
-    Route::view('/email/faturamento/send', 'faturamento.email-faturamento')->name('email-faturamento');
 
     //Get
     Route::get('/', [FinanciasMesController::class, 'index'])->name('home');
@@ -69,6 +68,8 @@ Route::middleware(acessController::class)->group(function () {
     //Relatórios e Consultas
     Route::get('relatorio/mes/{mes}/{ano}', [FinanciasMesController::class, 'pdfGenerator'])->name('pdf-generator');
     Route::post('send/email', [FinanciasMesController::class, 'sendEmail'])->name('email-send');
+    Route::view('email/template', 'pdf.mail-template');
+    Route::view('/email/faturamento/send/id={id}', 'faturamento.email-faturamento')->name('email-faturamento');
 
    
 });

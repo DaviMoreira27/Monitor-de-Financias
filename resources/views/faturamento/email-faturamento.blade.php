@@ -7,14 +7,16 @@
         <h1>Enviar relatório para Email</h1>
 
         @if ($errors->all())
-                <div class="errors-container">
-                    @foreach ($errors->all() as $error)
-                        <p>{{ $error }}</p>
-                    @endforeach
-                </div>
-            @endif
-        <form action="{{route('email-send')}}" method="POST">
+            <div class="errors-container">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+        <form action="{{ route('email-send') }}" method="POST">
             @csrf('POST')
+
+            <input type="hidden" name="idFinancias" value="{{ request('id') }}">
 
             <label for="input-email">Email
                 <input type="email" name="email" id="input-email">

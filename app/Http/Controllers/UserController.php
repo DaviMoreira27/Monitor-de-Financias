@@ -64,18 +64,25 @@ class UserController extends Controller
         ]);
 
         $rememberMe = $request->input('rememberMe')  == 'on' ? true : false;
+        $user = User::all()->where('cnpj', $request->input('cnpj'))->toArray();
+
 
         if (Auth::check()) {
+            if($request->session()->has('user')){
+                return redirect('/');
+            }
+
+            $request->session()->regenerate();
+            $request->session()->put('user', $user);
+
             return back()->withErrors(['login' => 'O usuário já está logado!']);
         }
 
-        $user = User::all()->where('cnpj', $request->input('cnpj'))->toArray();
 
         $request->merge([
             'password' => Hash::make($request->input('password'))
         ]);
 
-        //TODO: Pegar as informações do usuário do BD
         if (Auth::attempt($validator, $rememberMe)) {
             $request->session()->regenerate();
             $request->session()->put('user', $user);

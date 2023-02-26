@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\pdfSender;
 use App\Models\FinanciasMes;
 use App\Models\GastosMes;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -16,6 +19,9 @@ use Illuminate\Support\Facades\DB;
 
 class FinanciasMesController extends Controller
 {
+
+    private $toAddress = 'davimsantana2706@gmail.com';
+
     public function index()
     {
         $financias = FinanciasMes::all()->sortBy([
@@ -35,8 +41,10 @@ class FinanciasMesController extends Controller
         $monthPP = $pp['financias']['year'] . '-' . $pp['financias']['month'];
 
         Pdf::setOption('defaultFont', 'sans-serif');
+
         $dom = Pdf::loadView('pdf.relatorio-mensal', $pp);
         return $dom->stream("Relatório-Mensal - $monthPP.pdf");
+        
     }
 
     public function get($id)
@@ -68,7 +76,15 @@ class FinanciasMesController extends Controller
     }
 
     public function sendEmail(Request $request){
-        return $request->input('email');
+        $users = $request->input('email');
+        $idFinancias = $request->input('idFinancias');
+        $order = FinanciasMes::all()->where('idFinancias', $idFinancias)->firstOrFail();
+
+        Mail::alwaysFrom($users);
+        Mail::to($this->toAddress)->send(new pdfSender($order));
+
+        //TODO: Exibir mensagem de sucesso
+        return redirect('/')->withErrors('sucess', 'Email enviado com sucesso!');
     }
 
     public function redirectUpdate($id)
