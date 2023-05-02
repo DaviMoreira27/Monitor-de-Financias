@@ -1,22 +1,22 @@
-.container-faturamento{
+.container-faturamento {
     width: 30%;
     margin-top: 3rem;
     padding: 1rem;
     border: 1px solid #000;
 }
 
-.row-faturamento{
+.row-faturamento {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.container-faturamento .row-buttons{
+.container-faturamento .row-buttons {
     display: flex;
     gap: 1rem;
 }
 
-.container-faturamento .row-buttons a{
+.container-faturamento .row-buttons a {
     border: transparent;
     color: #FFF;
     padding: 1rem;
@@ -30,13 +30,13 @@
     background-color: #00C947;
 }
 
-.row-info{
+.row-info {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
 }
 
-.box-gastos{
+.box-gastos {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -45,30 +45,36 @@
     padding: 1rem;
 }
 
-.box-gastos #delete-btn{
+.box-gastos #delete-btn {
     padding: 1rem;
     border: transparent;
     color: #FFF;
     background-color: #FA5E4E;
 }
 
-.box-gastos .valorTipo{
-    display: flex;
-    flex-direction: column;
-    align-items: end;
+.box-gastos .nomeData {
+    width: 40%;
 }
 
-.row-info{
+.box-gastos .valorTipo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row-info {
     margin-top: 1rem;
 }
 
-.container-options{
+.container-options {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     width: 30%;
+    justify-content: center;
+    gap: 1rem;
 }
 
-.container-options a{
+.container-options a {
     padding: 1rem;
     cursor: pointer;
     transition: ease .4s;
@@ -94,9 +100,21 @@
 
 /* HOVER */
 
-.container-options #month-pdf:hover, #simples-doc:hover, #email-send:hover{
+.container-options #month-pdf:hover,
+#simples-doc:hover,
+#email-send:hover {
     background-color: #FFF;
     color: #000;
     border: 1px solid #000;
     transition: ease .4s;
+}
+
+
+@media (max-width: 1500px) {
+    .container-faturamento {
+        width: 60%;
+        margin-top: 3rem;
+        padding: 1rem;
+        border: 1px solid #000;
+    }
 }

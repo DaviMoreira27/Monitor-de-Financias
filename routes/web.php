@@ -75,5 +75,5 @@ Route::middleware(acessController::class)->group(function () {
 });
 
 Route::get('/session/test', function(){
-    return session()->all();
+    return session()->get('user');
 });

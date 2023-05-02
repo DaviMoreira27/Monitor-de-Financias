@@ -4,12 +4,93 @@
 
 
 @section('content')
+    <style>
+        .tg {
+            border-collapse: collapse;
+            border-color: #aaa;
+            border-spacing: 0;
+            width: 100%;
+            height: 800px;
+            text-align: center;
+        }
+
+        .tg td {
+            background-color: #fff;
+            border-color: #aaa;
+            border-style: solid;
+            border-width: 1px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 1rem;
+            word-break: normal;
+        }
+
+        .tg th {
+            background-color: #f38630;
+            border-color: #aaa;
+            border-style: solid;
+            border-width: 1px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 1.5rem;
+            font-weight: normal;
+            overflow: hidden;
+            word-break: normal;
+        }
+
+        .tg .tg-baqh {
+            text-align: center;
+            vertical-align: top;
+            padding: 1rem
+        }
+
+        .tg .tg-9h37 {
+            background-color: #aaaaaa;
+            font-style: italic;
+            text-align: left;
+            vertical-align: middle
+        }
+
+        .tg .tg-0lax {
+            text-align: left;
+            vertical-align: top
+        }
+
+        .tg .tg-siks {
+            background-color: #aaaaaa;
+            text-align: left;
+            vertical-align: top
+        }
+
+        .tg .tg-298w {
+            background-color: #aaaaaa;
+            color: #aaaaaa;
+            text-align: left;
+            vertical-align: top
+        }
+
+        .tg .tg-cnpj{
+            background-color: #aaaaaa;
+            font-size: 1rem;
+            padding-top: 1rem;
+        }
+    </style>
     <center>
         <main class="container-center">
             <table class="tg">
                 <thead>
                     <tr>
                         <th class="tg-baqh" colspan="24">Relátorio Mês {{ $financias['month'] }}</th>
+                    </tr>
+
+                    <tr>
+                        <th class="tg-cnpj" colspan="24">
+                            {{Session::get('user')[2]['cnpj']}}
+                            -
+                            {{Session::get('user')[2]['razaoSocial']}}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

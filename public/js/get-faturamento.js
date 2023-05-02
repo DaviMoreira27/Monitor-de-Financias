@@ -10,3 +10,4 @@ h4Rows.forEach(el => {
         el.style.color = '#FA5E4E';
     }
 })
+

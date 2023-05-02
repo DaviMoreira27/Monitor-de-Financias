@@ -24,19 +24,24 @@ class FinanciasMesController extends Controller
 
     public function index()
     {
+        $session =  session()->get('user');
+
         $financias = FinanciasMes::all()->sortBy([
             ['year', 'desc'],
             ['month', 'desc'],
-        ])->where('idUser', session()->get('user.0.id'));
+        ])->where('idUser', reset($session)['id']);
 
         $datas = $financias;
+
         return view('index')->with('datas', $datas);
     }
 
     public function pdfGenerator($mes, $year)
     {
+        $session =  session()->get('user');
+
         $financias = FinanciasMes::all()->where('month', $mes)->where('year', $year)
-            ->where('idUser', session()->get('user.0.id'))->all();
+            ->where('idUser', reset($session)['id'])->all();
         $pp['financias'] = reset($financias)->attributesToArray();
         $monthPP = $pp['financias']['year'] . '-' . $pp['financias']['month'];
 
@@ -57,9 +62,11 @@ class FinanciasMesController extends Controller
 
     public function getMonth()
     {
+        $session =  session()->get('user');
+
         $financias = FinanciasMes::all()->sortBy([
             ['month', 'desc'],
-        ])->where('idUser', session()->get('user.0.id'));
+        ])->where('idUser', reset($session)['id']);
 
         $datas = $financias;
         return view('index')->with('datas', $datas);
@@ -67,9 +74,11 @@ class FinanciasMesController extends Controller
 
     public function getYear()
     {
+        $session =  session()->get('user');
+
         $financias = FinanciasMes::all()->sortBy([
             ['year', 'desc'],
-        ])->where('idUser', session()->get('user.0.id'));
+        ])->where('idUser', reset($session)['id']);
 
         $datas = $financias;
         return view('index')->with('datas', $datas);
@@ -155,12 +164,13 @@ class FinanciasMesController extends Controller
         ]);
 
         //0 => Mês, 1 => Ano
+        $session =  session()->get('user');
         $monthYear = $this->retrieveMonthYear($request->input('month-year'));
         $cardValue = $this->calcCard([$request->input('FaturaD'), $request->input('FaturaC')]);
         $finalBalance = $this->finalBalance($request->input('collectionGastos'), $cardValue);
         $expenses = $this->expensesMonth($request->input('collectionGastos'));
 
-        $financia->idUser = $request->session()->get('user.0.id');
+        $financia->idUser = reset($session)['id'];
         $financia->month = $monthYear[0];
         $financia->year = $monthYear[1];
         $financia->faturaCartao = number_format($request->input('FaturaC'), 2, '.', '');
