@@ -1,0 +1,95 @@
+form{
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+form label{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form label input, form label select{
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgb(50, 50, 50);
+}
+
+
+form .rows label{
+   width: 80%;
+}
+
+form #add-gasto{
+    width: 80%;
+}
+
+form button[type='submit']{
+    padding: 1rem;
+}
+
+.errors-container{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    background-color: #de7575;
+    padding: 1rem;
+    color: #FFFF;
+}
+
+.sucess-container{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    background-color: #159419;
+    padding: 1rem;
+    color: #FFFF;
+}
+
+.container-center{
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    gap: 10rem !important;
+}
+
+.listTipos{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+    background-color: #667ad1;
+    color: #FFF;
+    width: 30rem;
+}
+
+.listTipos .itens{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #FFF;
+    align-items: center;
+}
+
+.itens a{
+    padding: 1rem;
+    background-color: red;
+    color: #FFF;
+    border: 1px solid red;
+    border-radius: 10px;
+    transition: ease .3s;
+    text-decoration: none;
+}
+
+.itens a:hover{
+    background-color: transparent;
+    color: #000;
+    font-weight: bolder;
+}
+
+.notExistGasto{
+    color: #FFF;
+    font-weight: bolder;
+}

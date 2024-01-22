@@ -15,9 +15,13 @@ class GastosMes extends Model
      * @var string
      */
     protected $primaryKey = 'idGasto';
-    protected $fillable = ['idFinancias', 'tipoGasto', 'dataGasto', 'valorGasto'];
+    protected $fillable = ['idFinancias', 'idTipoGasto', 'valorGasto'];
 
     public function FinanciasMes(){
         return $this->belongsTo(FinanciasMes::class);
+    }
+
+    public function TipoGasto(){
+        return $this->belongsTo(TipoGasto::class);
     }
 }

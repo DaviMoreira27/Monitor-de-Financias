@@ -28,27 +28,20 @@
                     <input type="month" value="{{$financia->year . '-' . $financia->month}}" id="select-month" name="month-year" placeholder="Nome do Gasto">
                 </label>
 
-                <div class="row-gasto rows">
-                <label for="input-nomeGasto">Nome do Gasto
-                    <input type="text" id="input-nomeGasto" placeholder="Nome do Gasto">
-                </label>
-
-                <label for="input-dataGasto">Data Gasto
-                    <input type="date"id="input-dataGasto">
-                </label>
-            </div>
 
             <div class="row-gasto rows">
                 <label for="select-tipoGasto">Tipo de Gasto
+                        
                     <select id="select-tipoGasto">
-                        <option value="01">Imposto</option>
-                        <option value="02">Compra Loja</option>
-                        <option value="03">Manutenção</option>
+                        @foreach ($getTiposGastos as $item)
+                            <option value="{{$item['idTipoGasto']}}">{{$item['nomeGasto']}}</option>
+                        @endforeach
                     </select>
                 </label>
 
+
                 <label for="input-valorGasto">Valor do Gasto
-                    <input type="number" data-js="money" id="input-valorGasto" placeholder="Valor do Gasto">
+                    <input type="text" data-js="money" id="input-valorGasto" placeholder="Valor do Gasto">
                 </label>
             </div>
             <div class="rowObj-gastos rows" id="rowObj-gastos"></div>

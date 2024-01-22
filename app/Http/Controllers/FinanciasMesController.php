@@ -16,11 +16,19 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use App\Models\TipoGasto;
 
 class FinanciasMesController extends Controller
 {
 
     private $toAddress = 'davimsantana2706@gmail.com';
+
+    public function redirectToView(){
+        $getTiposGastos = TipoGasto::all()->toArray();
+        return view('faturamento.novo-faturamento', [
+            'getTiposGastos' => $getTiposGastos ? $getTiposGastos : []]);
+    }
+
 
     public function index()
     {
@@ -56,8 +64,10 @@ class FinanciasMesController extends Controller
     {
         $financias = FinanciasMes::all()->where('idFinancias', $id)->take(1)->all();
         $gastos = GastosMes::all()->where('idFinancias', $id)->all();
-        $tipoGasto = DB::table('tipo_gasto')->get();
-        return view('faturamento.get-faturamento')->with('financias', $financias)->with('gastos', $gastos)->with('tipoGasto', $tipoGasto);
+        $tipoGasto = TipoGasto::all()->toArray();
+        return view('faturamento.get-faturamento')->with('financias', $financias)
+        ->with('gastos', $gastos)->with('tipoGasto', $tipoGasto)
+        ->with('tipoGasto', $tipoGasto);
     }
 
     public function getMonth()
@@ -98,8 +108,11 @@ class FinanciasMesController extends Controller
 
     public function redirectUpdate($id)
     {
+        $getTiposGastos = TipoGasto::all()->toArray();
         $financias = FinanciasMes::all()->where('idFinancias', $id)->take(1)->all();
-        return view('faturamento.atualizar-faturamento')->with('financias', $financias);
+        return view('faturamento.atualizar-faturamento')
+        ->with('financias', $financias)
+        ->with('getTiposGastos', $getTiposGastos);
     }
 
     public function update(Request $request, $id)
@@ -155,6 +168,8 @@ class FinanciasMesController extends Controller
     public function store(Request $request)
     {
         $financia = new FinanciasMes();
+
+        // dd($request->collectionGastos);
 
         $validation = $request->validate([
             'month-year' => ['required', 'date_format:Y-m'],

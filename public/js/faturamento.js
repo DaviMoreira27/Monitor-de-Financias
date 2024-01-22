@@ -1,10 +1,8 @@
-const inputNomeGasto = document.getElementById('input-nomeGasto');
 const selectTipoGasto = document.getElementById('select-tipoGasto');
 const inputValorGasto = document.getElementById('input-valorGasto');
 const buttoAddGasto = document.getElementById('add-gasto');
 const divObjGastos = document.getElementById('rowObj-gastos');
 const collectionInput = document.getElementById('inputCollectGastos');
-const inputDataGasto = document.getElementById('input-dataGasto');
 const formPost = document.querySelector('form');
 
 function isEmpty(str) {
@@ -13,23 +11,26 @@ function isEmpty(str) {
 
 let collectionGasto = []
 
+if(localStorage.getItem('gastos')){
+    collectionGasto = JSON.parse(localStorage.getItem('gastos'));
+}
+
+
 //TODO: Refatorar em uma classe
 
 buttoAddGasto.addEventListener('click', () => {
-    if (!isEmpty(inputNomeGasto.value) && !isEmpty(selectTipoGasto.value) && !isEmpty(inputValorGasto.value)) {
+    if (!isEmpty(selectTipoGasto.value) && !isEmpty(inputValorGasto.value)) {
         let gastoObj = {
-            nomeGasto: inputNomeGasto.value,
             tipoGasto: selectTipoGasto.value,
+            nomeGasto: selectTipoGasto.options[selectTipoGasto.selectedIndex].text,
             valorGasto: inputValorGasto.value,
-            dataGasto: inputDataGasto.value
         };
 
         collectionGasto.push(gastoObj);
+        localStorage.setItem('gastos', JSON.stringify(collectionGasto));
 
         gastoObj = {}
-        inputNomeGasto.value = '';
         inputValorGasto.value = '';
-        inputDataGasto.value = '';
 
         let divObj = document.createElement('div');
         let titleDivObj = document.createElement('p');
@@ -73,6 +74,7 @@ buttoAddGasto.addEventListener('click', () => {
 
     formPost.addEventListener('submit', () => {
         collectionInput.value = JSON.stringify(collectionGasto)
+        localStorage.removeItem('gastos')
     })
 
     } 

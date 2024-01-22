@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('tipo_gasto', function (Blueprint $table) {
             $table->id('idTipoGasto')->autoIncrement();
-            $table->string('campoGasto', 260)->charset('UTF8');
+            $table->string('nomeGasto', 260)->charset('UTF8');
+            $table->string('tipoGasto', 260)->charset('UTF8');
             $table->timestamps($precision = 0);
         });
 
