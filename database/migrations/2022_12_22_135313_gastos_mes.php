@@ -18,8 +18,6 @@ return new class extends Migration
             $table->id('idGasto')->autoIncrement()->from(1000);
             $table->foreignId('idFinancias');
             $table->foreignId('idTipoGasto');
-            $table->string('nomeGasto')->charset('UTF8');
-            $table->timestamp('dataGasto');
             $table->decimal('valorGasto', 10, 2)->unsigned()->default(0.00);
             $table->timestamps();
         });

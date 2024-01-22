@@ -50,3 +50,8 @@ form .pushedGastos{
     padding: 1rem;
     color: #FFFF;
 }
+
+.errorTipoGasto{
+    color: red;
+    font-weight: bolder;
+}

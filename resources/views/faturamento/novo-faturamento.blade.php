@@ -23,24 +23,22 @@
                 <input type="month" id="select-month" name="month-year" placeholder="Nome do Gasto">
             </label>
 
-            <div class="row-gasto rows">
-                <label for="input-nomeGasto">Nome do Gasto
-                    <input type="text" id="input-nomeGasto" placeholder="Nome do Gasto">
-                </label>
-
-                <label for="input-dataGasto">Data Gasto
-                    <input type="date"id="input-dataGasto">
-                </label>
-            </div>
+            @if (!empty($getTiposGastos))
 
             <div class="row-gasto rows">
                 <label for="select-tipoGasto">Tipo de Gasto
+                        
                     <select id="select-tipoGasto">
-                        <option value="01">Imposto</option>
-                        <option value="02">Compra Loja</option>
-                        <option value="03">Manutenção</option>
+                        @foreach ($getTiposGastos as $item)
+                            <option value="{{$item['idTipoGasto']}}">{{$item['nomeGasto']}}</option>
+                        @endforeach
                     </select>
                 </label>
+
+                @else
+                    <p class="errorTipoGasto">Adicione um tipo de gasto primeiro!</p>
+
+            @endif
 
                 <label for="input-valorGasto">Valor do Gasto
                     <input type="text" data-js="money" id="input-valorGasto" placeholder="Valor do Gasto">
@@ -48,7 +46,11 @@
             </div>
             <div class="rowObj-gastos rows" id="rowObj-gastos"></div>
             <input type="hidden" name="collectionGastos" id="inputCollectGastos">
-            <button type="button" id="add-gasto">Adicionar Gasto</button>
+            @if (!empty($getTiposGastos))
+                <button type="button" id="add-gasto">Adicionar Gasto</button>
+            @else
+                <button disabled type="button" id="add-gasto">Adicionar Gasto</button>
+            @endif
 
             <label for="input-faturamentoD">Faturamento Dinheiro
                 <input type="text" data-js="money" id="input-faturamentoD" name="FaturaD" placeholder="Faturamento em Dinheiro">
@@ -57,8 +59,11 @@
             <label for="input-faturamentoC">Faturamento Cartão
                 <input type="text" data-js="money" id="input-faturamentoC" name="FaturaC" placeholder="Faturamento Cartão">
             </label>
-
-            <button type="submit" id="final-gasto">Adicionar Gasto</button>
+            @if (!empty($getTiposGastos))
+                <button type="submit" id="final-gasto">Adicionar Gasto</button>
+            @else
+                <button disabled type="submit" id="final-gasto">Adicionar Fatura</button>
+            @endif
         </form>
     </main>
     <script src="/js/regex.js"></script>

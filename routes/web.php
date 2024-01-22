@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FinanciasMesController;
 use App\Http\Controllers\GastosMesController;
 use App\Http\Controllers\InsertFaturamentoController;
+use App\Http\Controllers\TipoGastoController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\acessController;
 
@@ -46,20 +47,23 @@ Route::post('/reset-password', [UserController::class, 'newPassword'])->middlewa
 Route::middleware(acessController::class)->group(function () {
 
     //View
-    Route::view('/pag/novo/faturamento', 'faturamento.novo-faturamento')->name('new/pag/faturamento');
+    Route::get('/pag/novo/faturamento', [FinanciasMesController::class, 'redirectToView'])->name('new/pag/faturamento');
 
     //Get
     Route::get('/', [FinanciasMesController::class, 'index'])->name('home');
     Route::get('/faturamento/{id}', [FinanciasMesController::class, 'get']);
     Route::get('/faturamento/mes/filter', [FinanciasMesController::class, 'getMonth'])->name('month-faturamento');
     Route::get('/faturamento/ano/filter', [FinanciasMesController::class, 'getYear'])->name('year-faturamento');
+    Route::get('/pag/novo/tipo/gasto', [TipoGastoController::class, 'listTiposGastos'])->name('tipo-gasto');
 
     //Post
     Route::post('post/faturamento', [FinanciasMesController::class, 'store'])->name('new/faturamento');
+    Route::post('post/tipo/gasto', [TipoGastoController::class, 'store'])->name('new-tipoGasto');
 
     //Delete
     Route::get('/deletar/faturamento/{id}', [FinanciasMesController::class, 'delete']);
     Route::get('/deletar/gastoMes/{idGasto}/{idFinancias}', [GastosMesController::class, 'delete']);
+    Route::get('/deletar/tipo/gasto/{idTipoGasto}', [TipoGastoController::class, 'delete'])->name('delete-tipoGasto');
 
     //Update(PATCH)
     Route::get('/atualizar/faturamento/{id}', [FinanciasMesController::class, 'redirectUpdate']);

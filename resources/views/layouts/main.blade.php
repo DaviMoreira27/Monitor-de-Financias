@@ -72,18 +72,21 @@
                 <li>
                     <a href="{{ route('home') }}">Dashboard</a>
                 </li>
-                @if (session()->get('user'))
-                    <li>
-                        <a href="{{ route('logout') }}">Logout</a>
-                    </li>
-                @else
-                    <li>
-                        <a href="{{ route('pag/register/login') }}">Cadastrar ou Entrar</a>
-                    </li>
-                @endif
                 <li>
                     <a href="{{ route('new/pag/faturamento') }}">Adicionar Faturamento Mensal</a>
                 </li>
+                <li>
+                    <a href="{{ route('tipo-gasto') }}">Adicionar Tipo de Gasto</a>
+                </li>
+                @if (session()->get('user'))
+                <li>
+                    <a href="{{ route('logout') }}">Logout</a>
+                </li>
+                @else
+                <li>
+                    <a href="{{ route('pag/register/login') }}">Cadastrar ou Entrar</a>
+                </li>
+                @endif
             </nav>
         </header>
     @endif

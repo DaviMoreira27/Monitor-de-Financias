@@ -18,9 +18,8 @@ class GastosMesController extends Controller
 
         //Atributos
         $gastoModel->idFinancias = $lastId;
-        $gastoModel->nomeGasto = $request['nomeGasto'];
+        // $gastoModel->nomeGasto = $request['nomeGasto'];
         $gastoModel->idTipoGasto = $request['tipoGasto'];
-        $gastoModel->dataGasto = $request['dataGasto'];
         $gastoModel->valorGasto = $request['valorGasto'];
 
         return $gastoModel->save();

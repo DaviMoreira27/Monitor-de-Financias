@@ -27,8 +27,11 @@ class FinanciasMesFactory extends Factory
     {
         return [
             'month' => $this->faker->numberBetween(1, 12),
+            'idUser' => 1,
             'year' => $this->faker->year(),
             'gastosMes' => RandomAmountGeneratorController::randomAmount(),
+            'faturaCartao' => RandomAmountGeneratorController::randomAmount(),
+            'faturaDinheiro' => RandomAmountGeneratorController::randomAmount(),
             'faturamentoMes' => RandomAmountGeneratorController::randomAmount(),
             'bFinal' => RandomAmountGeneratorController::randomAmount(),
             'created_at' => $this->faker->dateTime(),

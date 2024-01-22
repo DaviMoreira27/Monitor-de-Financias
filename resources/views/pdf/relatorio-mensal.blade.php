@@ -87,9 +87,8 @@
 
                     <tr>
                         <th class="tg-cnpj" colspan="24">
-                            {{Session::get('user')[2]['cnpj']}}
-                            -
-                            {{Session::get('user')[2]['razaoSocial']}}
+                            {{array_values(Session::get('user'))[0]['cnpj']}}
+                            {{array_values(Session::get('user'))[0]['razaoSocial']}}
                         </th>
                     </tr>
                 </thead>
@@ -127,6 +126,7 @@
                     <tr>
                         <td class="tg-298w" colspan="24"></td>
                     </tr>
+                    {{date_default_timezone_set('America/Sao_Paulo')}}
                     <tr>
                         <td class="tg-baqh" colspan="24">São Paulo, {{ date('d/M/Y') }}</td>
                     </tr>
